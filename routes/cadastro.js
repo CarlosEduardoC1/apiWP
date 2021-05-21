@@ -8,5 +8,6 @@ routes.get('/get-data', controller.get);
 routes.post('/time/update-data/:id', controller.updateTime);
 routes.delete('/delete-data/:id', controller.delete);
 
+//s
 
 module.exports = routes;
