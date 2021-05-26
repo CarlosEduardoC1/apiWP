@@ -1,10 +1,10 @@
 
 const sqlite = require('sqlite3').verbose();
-var db = new sqlite.Database('suporte.S3DB');
 const query = require('../db/log');
 
 
 exports.save = async (req, res, next) => {
+    var db = new sqlite.Database('suporte.S3DB');
     console.log(req.body);
     db.run(query.insert,
         req.body.cliente
@@ -41,6 +41,7 @@ exports.save = async (req, res, next) => {
 }
 
 exports.get = async (req, res, next) => {
+    var db = new sqlite.Database('suporte.S3DB');
     var params = []
     db.all(query.select, params, (err, rows) => {
         if (err) { res.status(400).json({ msg: "Não foi possível buscar arquivos", status: 400 }) }
@@ -53,6 +54,7 @@ exports.get = async (req, res, next) => {
 }
 
 exports.delete = async (req, res, next) => {
+    var db = new sqlite.Database('suporte.S3DB');
     db.run(query.delete, req.params.id, (err, result) => {
         if (err) { res.status(400).json({ msg: 'Erro ao deletar.', status: 400 }) }
         else {
@@ -63,6 +65,7 @@ exports.delete = async (req, res, next) => {
 
 
 exports.saveID = async (req, res, next) => {
+    var db = new sqlite.Database('suporte.S3DB');
     db.run(query.insertID,
         req.body.id
         , req.body.cliente
@@ -97,6 +100,7 @@ exports.saveID = async (req, res, next) => {
 }
 
 exports.updateDataCobranca = async (req, res, next) => {
+    var db = new sqlite.Database('suporte.S3DB');
     var params = []
     db.all(query.updtDT, req.body.dataCobranca, req.params.id, (err, rows) => {
         if (err) { res.status(400).json({ msg: "Não foi possível buscar arquivos", status: 400 }) }
@@ -109,6 +113,7 @@ exports.updateDataCobranca = async (req, res, next) => {
 }
 
 exports.getFinalizadas = async (req, res, next) => {
+    var db = new sqlite.Database('suporte.S3DB');
     var params = []
     db.all(query.getFinais, params, (err, rows) => {
         if (err) { res.status(400).json({ msg: "Não foi possível buscar arquivos", status: 400 }) }

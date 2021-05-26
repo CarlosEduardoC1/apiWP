@@ -1,10 +1,10 @@
 
 const sqlite = require('sqlite3').verbose();
-var db = new sqlite.Database('suporte.S3DB');
 const query = require('../db/cadastro');
 
 
 exports.save = async (req, res, next) => {
+    var db = new sqlite.Database('suporte.S3DB');
     db.run(query.insert,
         req.body.cliente
         , req.body.dtAgendamento
@@ -24,8 +24,9 @@ exports.save = async (req, res, next) => {
 }
 
 exports.get = async (req, res, next) => {
+    var db = new sqlite.Database('suporte.S3DB');
     db.all(query.select, (err, rows) => {
-        if (err) { console.log('error'); res.status(400).json({ msg: "Não foi possível buscar dados", status: 400 }) }
+        if (err) { console.log(err); res.status(400).json({ msg: "Não foi possível buscar dados", status: 400 }) }
         else {
             db.close();
             console.log('success');
@@ -35,6 +36,7 @@ exports.get = async (req, res, next) => {
 }
 
 exports.updateTime = async (req, res, next) => {
+    var db = new sqlite.Database('suporte.S3DB');
     console.log("request")
     db.all(query.updateHour, req.body.hrInicio, req.params.id, (err, rows) => {
         if (err) { console.log('error'); res.status(400).json({ msg: "Não foi possível buscar dados", status: 400 }) }
@@ -46,6 +48,7 @@ exports.updateTime = async (req, res, next) => {
 }
 
 exports.delete = async (req, res, next) => {
+    var db = new sqlite.Database('suporte.S3DB');
     db.run(query.delete, req.params.id, (err, result) => {
         if (err) { res.status(400).json({ msg: 'Erro ao deletar.', status: 400 }) }
         else {

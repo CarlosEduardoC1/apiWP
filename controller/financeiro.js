@@ -1,10 +1,10 @@
 
 const sqlite = require('sqlite3').verbose();
-var db = new sqlite.Database('suporte.S3DB');
 const query = require('../db/financeiro');
 
 
 exports.save = async (req, res, next) => {
+    var db = new sqlite.Database('suporte.S3DB');
     db.run(query.insert,
         req.body.cliente
         , req.body.dtAgendamento
@@ -39,6 +39,7 @@ exports.save = async (req, res, next) => {
 }
 
 exports.get = async (req, res, next) => {
+    var db = new sqlite.Database('suporte.S3DB');
     var params = []
     db.all(query.select, params, (err, rows) => {
         if (err) { res.status(400).json({ msg: "Não foi possível buscar agendamentos", status: 400 }) }
@@ -51,6 +52,7 @@ exports.get = async (req, res, next) => {
 }
 
 exports.updateOBS = async (req, res, next) => {
+    var db = new sqlite.Database('suporte.S3DB');
     db.all(query.updOBS, req.body.obsfinanceiro, req.params.id, (err, rows) => {
         if (err) { res.status(400).json({ msg: "Não foi possível buscar dados", status: 400 }) }
         else {
@@ -61,6 +63,7 @@ exports.updateOBS = async (req, res, next) => {
 }
 
 exports.updatePGTO = async (req, res, next) => {
+    var db = new sqlite.Database('suporte.S3DB');
     db.all(query.updPGTO, req.body.statusPagamento, req.params.id, (err, rows) => {
         if (err) { res.status(400).json({ msg: "Não foi possível buscar dados", status: 400 }) }
         else {
@@ -71,6 +74,7 @@ exports.updatePGTO = async (req, res, next) => {
 }
 
 exports.getWhere = async (req, res, next) => {
+    var db = new sqlite.Database('suporte.S3DB');
     db.all(query.where, req.params.filtro, (err, rows) => {
         if (err) { res.status(400).json({ msg: "Não foi possível buscar dados", status: 400 }) }
         else {
@@ -81,6 +85,7 @@ exports.getWhere = async (req, res, next) => {
 }
 
 exports.delete = async (req, res, next) => {
+    var db = new sqlite.Database('suporte.S3DB');
     db.run(query.delete, req.params.id, (err, result) => {
         if (err) { res.status(400).json({ msg: 'Erro ao deletar.', status: 400 }) }
         else {
