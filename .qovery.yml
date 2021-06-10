@@ -1,0 +1,11 @@
+---
+application:
+  name: "apiwp"
+  project: "api-wp"
+  organization: "QoveryCommunity"
+routers:
+- name: "main-apiwp"
+  routes:
+  - application_name: "apiwp"
+    paths:
+    - "/*"
