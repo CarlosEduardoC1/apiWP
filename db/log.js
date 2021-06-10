@@ -15,3 +15,5 @@ exports.insertID = `INSERT INTO logstarefas (id, cliente, dtAgendamento, hrAgend
 
 exports.getFinais = `SELECT id, solicita, cliente, cobranca, dtFinalizacao, numOS, tipo, tmpAtendimento, situacao, email, servico, clienteNome, dataCobranca FROM logstarefas 
 ORDER by cobranca`;
+
+exports.getOs = `SELECT * FROM logstarefas WHERE cliente = ?`;
